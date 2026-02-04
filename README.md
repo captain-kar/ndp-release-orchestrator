@@ -69,3 +69,18 @@ Step 3: Add GitHub API Client
     Create file: services/github_client.py
 
 Step 4: Update app.py to Show Merged PRs
+
+
+===================================================================================
+
+Phase-3 - Detect Missing Backports
+
+For each PR merged in a lower branch (e.g., release/6.5), show whether it exists in higher branches (6.6, 6.7, emeraldpeak).
+If missing → show a Backport button
+
+Step 1: Add helper to check if commit exists in branch
+Create file:
+services/backport_detector.py
+
+Step 2: Update UI to show missing backports
+In app.py, after fetching PRs, change rendering for release/6.5 PRs:

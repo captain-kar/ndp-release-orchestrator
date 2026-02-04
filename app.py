@@ -1,6 +1,10 @@
 import streamlit as st
 import yaml
 
+import os
+from services.backport_detector import is_commit_in_branch
+
+
 st.set_page_config(page_title="Release Backport Orchestrator", layout="wide")
 
 st.title("🚀 Release Backport Orchestrator")
@@ -49,3 +53,49 @@ for i, (col, branch) in enumerate(zip(pr_cols, hierarchy)):
                 st.markdown(f"- [#{pr['number']}]({pr['url']}) {pr['title']}")
         except Exception as e:
             st.error(f"Error fetching PRs: {e}")
+
+
+st.divider()
+st.subheader("Backport Status (hierarchy-wise)")
+
+token = os.getenv("GITHUB_TOKEN")
+
+if not token:
+    st.error("GITHUB_TOKEN is not set. Backport status cannot be determined.")
+else:
+    for i, base_branch in enumerate(hierarchy[:-1]):  # skip the last (latest)
+        st.markdown(f"## PRs merged in {base_branch}")
+
+        prs = get_merged_prs(ORG, selected_repo, base_branch, limit=5)
+
+        if not prs:
+            st.caption(f"No merged PRs found in {base_branch}")
+            continue
+
+        for pr in prs:
+            st.markdown(f"### #{pr['number']} – {pr['title']}")
+
+            for higher_branch in hierarchy[i+1:]:
+                try:
+                    exists = is_commit_in_branch(
+                        ORG,
+                        selected_repo,
+                        higher_branch,
+                        pr["merge_commit_sha"],
+                        token
+                    )
+
+                    if exists:
+                        st.success(f"{higher_branch} → already contains this fix")
+                    else:
+                        col1, col2 = st.columns([3, 1])
+                        with col1:
+                            st.warning(f"{higher_branch} → missing backport")
+                        with col2:
+                            st.button(
+                                f"Backport → {higher_branch}",
+                                key=f"{pr['number']}-{base_branch}-{higher_branch}"
+                            )
+
+                except Exception as e:
+                    st.error(f"Error checking {higher_branch}: {e}")
