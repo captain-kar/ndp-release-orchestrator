@@ -1,6 +1,10 @@
 import streamlit as st
 import yaml
 
+from services.github_client import get_merged_prs
+
+ORG = "captain-kar"
+
 import os
 from services.backport_detector import is_commit_in_branch
 
@@ -31,10 +35,6 @@ for i, (col, branch) in enumerate(zip(cols, hierarchy)):
             st.markdown("⬇️")
 
 
-
-from services.github_client import get_merged_prs
-
-ORG = "captain-kar"
 
 
 st.subheader("Merged PRs (last 10 per branch)")
