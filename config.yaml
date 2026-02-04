@@ -1,42 +1,48 @@
 repos:
-  tsgraphdb:
-    hierarchy:
-      - release/6.5
-      - release/6.6
-      - release/6.7
-      - release/emeraldpeak
+  # tsgraphdb:
+  #   hierarchy:
+  #     - release/6.5
+  #     - release/6.6
+  #     - release/6.7
+  #     - release/emeraldpeak
 
-  ndp-datastores:
-    hierarchy:
-      - release/6.5
-      - release/6.6
-      - release/6.7
-      - release/emeraldpeak
+  # ndp-datastores:
+  #   hierarchy:
+  #     - release/6.5
+  #     - release/6.6
+  #     - release/6.7
+  #     - release/emeraldpeak
 
-  graphadmin:
-    hierarchy:
-      - release/6.5
-      - release/6.6
-      - release/6.7
-      - release/emeraldpeak
+  # graphadmin:
+  #   hierarchy:
+  #     - release/6.5
+  #     - release/6.6
+  #     - release/6.7
+  #     - release/emeraldpeak
 
-  graphwriter:
-    hierarchy:
-      - release/6.5
-      - release/6.6
-      - release/6.7
-      - release/emeraldpeak
+  # graphwriter:
+  #   hierarchy:
+  #     - release/6.5
+  #     - release/6.6
+  #     - release/6.7
+  #     - release/emeraldpeak
 
-  queryengine:
-    hierarchy:
-      - release/6.5
-      - release/6.6
-      - release/6.7
-      - release/emeraldpeak
+  # queryengine:
+  #   hierarchy:
+  #     - release/6.5
+  #     - release/6.6
+  #     - release/6.7
+  #     - release/emeraldpeak
 
-  aggregationjobs:
+  # aggregationjobs:
+  #   hierarchy:
+  #     - release/6.5
+  #     - release/6.6
+  #     - release/6.7
+  #     - release/emeraldpeak
+
+  sample-repo:
     hierarchy:
       - release/6.5
       - release/6.6
       - release/6.7
-      - release/emeraldpeak
