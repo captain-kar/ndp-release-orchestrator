@@ -26,4 +26,26 @@ for i, (col, branch) in enumerate(zip(cols, hierarchy)):
         if i < len(hierarchy) - 1:
             st.markdown("⬇️")
 
-st.info("Next step: Show merged PRs and missing backports across this hierarchy.")
+
+
+from services.github_client import get_merged_prs
+
+ORG = "captain-kar"
+
+
+st.subheader("Merged PRs (last 10 per branch)")
+
+pr_cols = st.columns(len(hierarchy))
+
+for i, (col, branch) in enumerate(zip(pr_cols, hierarchy)):
+    with col:
+        st.markdown(f"### {branch}")
+
+        try:
+            prs = get_merged_prs(ORG, selected_repo, branch, limit=5)
+            if not prs:
+                st.caption("No merged PRs found")
+            for pr in prs:
+                st.markdown(f"- [#{pr['number']}]({pr['url']}) {pr['title']}")
+        except Exception as e:
+            st.error(f"Error fetching PRs: {e}")

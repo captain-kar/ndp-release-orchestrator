@@ -39,3 +39,32 @@ Step 5: Run It
 
         streamlit run app.py
 
+======================================================================================================
+Phase-2 - Discover merged PRs on older branches.
+
+Step 1: Create GitHub Token (One-time setup)
+
+You’ll need a GitHub PAT
+
+1. Go to GitHub → Settings → Developer Settings → Personal Access Tokens
+2. Create token with:
+    ✅ repo
+    ✅ read:org
+3. Save it somewhere safe
+Then export it:
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxx
+
+
+Step 2: Add Dependency
+    pip install requests
+
+Update requirements.txt:
+
+    streamlit
+    pyyaml
+    requests
+
+Step 3: Add GitHub API Client
+    Create file: services/github_client.py
+
+Step 4: Update app.py to Show Merged PRs
